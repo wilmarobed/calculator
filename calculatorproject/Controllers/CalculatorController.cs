@@ -39,4 +39,30 @@ public class CalculatorController : ControllerBase
             return StatusCode(500, response);
         }
     }
+
+    [HttpPost("subtract")]
+    public ActionResult<CalculatorResponse> subtract([FromBody] List<double> nums)
+    {
+        try
+        {
+            double total = nums.FirstOrDefault();
+
+            //nums.For((num) =>
+            for (int i = 1; i < nums.Count; i++)
+            {
+                //total =+ num;
+                total = total - nums[i];
+            };
+
+            CalculatorResponse response = new CalculatorResponse { value = total };
+
+            return StatusCode(200, response);
+        }
+        catch (System.Exception)
+        {
+            CalculatorResponse response = new CalculatorResponse { message = "Ha Ocurrido un error!" };
+
+            return StatusCode(500, response);
+        }
+    }
 }
