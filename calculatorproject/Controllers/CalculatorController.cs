@@ -65,4 +65,52 @@ public class CalculatorController : ControllerBase
             return StatusCode(500, response);
         }
     }
+
+     [HttpPost("multiplication")]
+    public ActionResult<CalculatorResponse> multiplication([FromBody] List<double> nums)
+    {
+        try
+        {
+            double total = nums.FirstOrDefault();
+
+            for (int i = 1; i < nums.Count; i++)
+            {
+                total = total * nums[i]; 
+            }
+
+            CalculatorResponse response = new CalculatorResponse {value = total};
+            return StatusCode(200, response);
+        }
+        catch (System.Exception)
+        {
+            CalculatorResponse response = new CalculatorResponse { message = "Ha Ocurrido un error!" };
+
+            return StatusCode(500, response);
+        }
+    }
+    [HttpPost("division")]
+    public ActionResult<CalculatorResponse> division([FromBody] List<double> nums)
+    {
+        try
+        {
+            double total = nums.FirstOrDefault();
+
+            for (int i = 1; i < nums.Count; i++)
+            {
+                //total =+ num;
+                total = total / nums[i];
+            };
+
+
+            CalculatorResponse response = new CalculatorResponse { value = total };
+
+            return StatusCode(200, response);
+        }
+        catch (System.Exception)
+        {
+            CalculatorResponse response = new CalculatorResponse { message = "Ha Ocurrido un error!" };
+
+            return StatusCode(500, response);
+        }
+    }
 }
